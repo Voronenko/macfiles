@@ -734,8 +734,6 @@ alias gpu_off='sudo prime-select intel'
 alias gpu='sudo prime-select query'
 # turn displays off
 alias doff='export DISPLAY=:0;sleep 3;xset dpms force off'
-# eliminate snaps from df output
-alias df='df -x"squashfs"'
 # shows tag matched to checked-out commit or branch otherwise
 alias gitinfo='git describe --exact-match --tags $(git log -n1 --pretty='%h') 2>/dev/null || echo "no tag, branch $(git branch --show-current)"'
 alias targz='tar -zcvf '
