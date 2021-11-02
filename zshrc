@@ -98,7 +98,7 @@ source ${HOME}/dotfiles/bin/kube-ps1.sh
 
 # User configuration
 
-export PATH=${HOME}/dotfiles/bin:$HOME/.jenv/bin:$HOME/.local/bin:/usr/local/bin:$HOME/config/composer/vendor/bin:$PATH:${KREW_ROOT:-$HOME/.krew}/bin
+export PATH=${HOME}/dotfiles/bin:$HOME/.rbenv/bin:$HOME/.jenv/bin:$HOME/.local/bin:/usr/local/bin:$HOME/config/composer/vendor/bin:$PATH:${KREW_ROOT:-$HOME/.krew}/bin
 export IBUS_ENABLE_SYNC_MODE=1 # JetBrains issues with IBus prior 1.5.11
 export DISABLE_AUTO_TITLE='true'
 
@@ -111,9 +111,9 @@ zstyle ':completion:*:*:git:*' script ~/.git-completion.zsh
 if [[ -d /usr/local/share/chruby/ ]]; then
 	# Linux installation of chruby
 	chruby_path=/usr/local/share/chruby/
-elif [[ -d /usr/local/opt/chruby/share/chruby/ ]]; then
+elif [[ -d /opt/homebrew/opt/chruby/share/chruby/ ]]; then
 	# Homebrew installation of chruby
-	chruby_path=/usr/local/opt/chruby/share/chruby/
+	chruby_path=/opt/homebrew/opt/chruby/share/chruby/
 fi
 
 if [[ -d $chruby_path ]]; then
