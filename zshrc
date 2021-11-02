@@ -319,16 +319,15 @@ alias reset_rights_here='find -type f -exec chmod --changes 644 {} + -o -type d 
 
 # [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
-if [[ -f ~/.nvm/nvm.sh ]]; then
-
-#source ~/.nvm/nvm.sh
+if [[ -f /opt/homebrew/opt/nvm/nvm.sh ]]; then
 
 declare -a NODE_GLOBALS=(`find ~/.nvm/versions/node -maxdepth 3 -wholename '*/bin/*' | xargs -n1 basename | sort | uniq`)
 NODE_GLOBALS+=("nvm", "nvm_find_nvmrc")
 
 load_nvm () {
-    export NVM_DIR=~/.nvm
-    source ~/.nvm/nvm.sh
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 }
 
 for cmd in "${NODE_GLOBALS[@]}"; do
@@ -652,7 +651,7 @@ alias battery_ext_status='upower -i $(upower -e | grep BAT1)'
 alias battery_int_status='upower -i $(upower -e | grep BAT0)'
 
 # Time to sleep
-alias 'nah'='echo "shutdown (ctrl-c to abort)?" && read && sudo shutdown 0'
+alias 'nah'='echo "shutdown (ctrl-c to abort)?" && read && sudo shutdown -h now'
 
 
 if [[ -f /usr/bin/bat ]]; then
