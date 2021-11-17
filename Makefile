@@ -134,8 +134,7 @@ install-workspace-toggle-cli:
 	sudo pip install togglCli
 
 install-direnv:
-	curl -sLo ~/dotfiles/bin/direnv https://github.com/direnv/direnv/releases/download/v2.28.0/direnv.linux-arm64
-	chmod +x ~/dotfiles/bin/direnv
+	brew install direnv
 
 # https://github.com/VirtusLab/git-machete
 # https://plugins.jetbrains.com/plugin/14221-git-machete
@@ -495,6 +494,14 @@ go-eg:
 
 install-jenv:
 	brew install jenv
+	eval "$(shell jenv init -)"
+	ls -1 /Library/Java/JavaVirtualMachines
+	echo https://gist.github.com/gwpantazes/50810d5635fc2e053ad117b39b597a14
+	echo go to  https://jdk.java.net/archive/ or https://jdk.java.net/
+	echo download your version
+	echo curl -o /tmp/openjdk-15.0.2_osx-x64_bin.tar.gz https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_osx-x64_bin.tar.gz
+	echo tar -xzf /tmp/openjdk-15.0.2_osx-x64_bin.tar.gz -C /Library/Java/JavaVirtualMachines/
+	echo rm /tmp/openjdk-15.0.2_osx-x64_bin.tar.gz
 
 # /JAVA
 

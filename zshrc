@@ -173,7 +173,7 @@ if [[ -f ~/dotfiles/ssh/ssh-ident ]]; then
   fi
 fi
 
-if [[ -f /usr/bin/direnv ]]; then
+if [[ -f /opt/homebrew/bin/direnv ]]; then
 # direnv
 eval "$(direnv hook zsh)"
 alias envrc_here='cp ~/dotfiles/direnv/derived.env ./.envrc'
