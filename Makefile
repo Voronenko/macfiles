@@ -658,3 +658,22 @@ brew-ruby-set-global-274:
 
 brew-iterm2:
 	brew install --cask iterm2
+
+brew-mobile-stuff: brew-jq
+	brew install mockserver
+	brew install coreutils
+	brew install allure
+
+brew-jq:
+	brew install jq
+
+install-browserstack-cli:
+	curl -o /tmp/BrowserStackLocal-darwin-x64.zip https://www.browserstack.com/browserstack-local/BrowserStackLocal-darwin-x64.zip
+
+install-maven-363:
+	curl -o /tmp/apache-maven-3.6.3-bin.tar.gz https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+	tar -xvf /tmp/apache-maven-3.6.3-bin.tar.gz -C /tmp
+	sudo mv /tmp/apache-maven-3.6.3 /Library/apache-maven-3.6.3
+	# export MAVEN_HOME=/Library/apache-maven-3.6.3
+	# export PATH=$MAVEN_HOME/bin:$PATH
+
