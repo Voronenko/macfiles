@@ -140,3 +140,5 @@ bin/doctl
 bin/lpass
 bin/testssl/
 bin/kustomize
+bin/BrowserStackLocal
+bin/bs

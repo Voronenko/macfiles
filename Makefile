@@ -72,8 +72,8 @@ install-console-lazygit:
 
 # https://github.com/junegunn/fzf
 install-console-fzf:
-	curl -sLo /tmp/fzf.tar.gz https://github.com/junegunn/fzf/releases/download/0.27.0/fzf-0.27.0-linux_armv7.tar.gz
-	tar -xvzf /tmp/fzf.tar.gz -C /tmp
+	curl -sLo /tmp/fzf.zip https://github.com/junegunn/fzf/releases/download/0.28.0/fzf-0.28.0-darwin_arm64.zip
+	unzip /tmp/fzf.zip -d /tmp
 	cp /tmp/fzf ~/dotfiles/bin
 	echo "Consider running make zsh-fzf to install zsh shell integration"
 
