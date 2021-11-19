@@ -502,6 +502,10 @@ install-jenv:
 	echo curl -o /tmp/openjdk-15.0.2_osx-x64_bin.tar.gz https://download.java.net/java/GA/jdk15.0.2/0d1cfde4252546c6931946de8db48ee2/7/GPL/openjdk-15.0.2_osx-x64_bin.tar.gz
 	echo tar -xzf /tmp/openjdk-15.0.2_osx-x64_bin.tar.gz -C /Library/Java/JavaVirtualMachines/
 	echo rm /tmp/openjdk-15.0.2_osx-x64_bin.tar.gz
+	# ensure that JAVA_HOME is correct
+	jenv enable-plugin export
+	# make Maven aware of the Java version in use (and switch when your project does)
+	jenv enable-plugin maven	
 
 # /JAVA
 
@@ -666,6 +670,9 @@ brew-mobile-stuff: brew-jq
 
 brew-jq:
 	brew install jq
+
+brew-vscode:
+	brew install --cask visual-studio-code
 
 install-browserstack-cli:
 	curl -o /tmp/BrowserStackLocal-darwin-x64.zip https://www.browserstack.com/browserstack-local/BrowserStackLocal-darwin-x64.zip
