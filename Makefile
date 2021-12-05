@@ -667,6 +667,7 @@ brew-mobile-stuff: brew-jq
 	brew install mockserver
 	brew install coreutils
 	brew install allure
+	brew install libplist
 
 brew-jq:
 	brew install jq
