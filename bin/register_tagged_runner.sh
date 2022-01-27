@@ -49,7 +49,7 @@ gitlab-runner register \
     --url "${CI_SERVER_URL}" \
     --name "${RUNNER_NAME}" \
     --registration-token "${REGISTER_TOKEN}" \
-    --cache-dir $HOME/gilab_runner/cache \
+    --cache-dir $HOME/gitlab_runner/cache \
     --builds-dir $HOME/gitlab_runner/builds \
     --executor shell \
     --tag-list "${RUNNER_TAGS}" \
