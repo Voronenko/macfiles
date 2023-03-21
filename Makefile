@@ -470,7 +470,7 @@ install-hashicorp-terraform:
 	cd ~/tmp/ && unzip terraform.zip && chmod +x terraform && rm terraform.zip && mv terraform ~/dotfiles/bin/
 
 install-hashicorp-packer:
-	curl -sLo ~/dotfiles/bin/packer.zip "https://releases.hashicorp.com/packer/1.6.6/packer_1.6.6_linux_arm64.zip"
+	curl -sLo ~/dotfiles/bin/packer.zip "https://releases.hashicorp.com/packer/1.8.6/packer_1.8.6_darwin_arm64.zip"
 	cd ~/dotfiles/bin/ && unzip packer.zip && chmod +x packer && rm packer.zip
 
 
