@@ -688,3 +688,12 @@ install-maven-363:
 brew-gitlab-runner:
 	brew install gitlab-runner
 	echo brew services start gitlab-runner
+
+# python
+
+install-pyenv:
+	brew reinstall ca-certificates
+	brew install pyenv
+	echo "Installing virtualenv plugin"
+	brew install pyenv-virtualenv
+	echo "Usage: pyenv virtualenv 3.9.15 name-of-virtual-env"

@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Set defaults
+PYVER="$(pyenv versions | grep -Po "\s+\K\d\.\d.\d" | uniq | head -1)"
+
+# Define colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+
+displayUsage() {
+    echo "
+An extension for pyenv virtualenv to instantiate a virtual environment and
+associate the local folder with the same virtual environment
+usage:  pyenv-here [pyver] <name>
+operations:
+    pyenv-here {-h help} shis dialogue
+    pyenv-here {-l list} list available python versions
+    pyenv-here {-p python version} python version to use, defauls: $PYVER
+"
+}
+
+# Go through optional arguments
+while getopts ":hlp:" opt; do
+    case ${opt} in
+        l)
+            echo "Available virtual python versions:"
+            pyenv versions
+            exit 1
+            ;;
+        p)
+            PYVER=${OPTARG}
+            ;;
+        h)
+            displayUsage
+            exit 1
+            ;;
+        \?)
+            echo "Invalid option: $OPTARG" 1>&2
+            displayUsage
+            exit 2
+            ;;
+        :)
+            echo "Invalid option: $OPTARG requires an argument" 1>&2
+            exit 2
+            ;;
+    esac
+done
+shift $(( OPTIND - 1 ))
+OPTIND=1
+
+# Check for mandatory arguments
+if [ $# -lt 1 ]
+then
+    echo '
+Not enough args provided. At least provide a name'
+    displayUsage
+fi
+
+ENVNAME=$1
+
+# init and associate pyenv virtualenv
+pyenv virtualenv "$PYVER" "$ENVNAME"
+pyenv local "$ENVNAME"
+
+# upgrade pip
+pip install --upgrade pip
+
+read -p "$(echo -e "${YELLOW}Install poetry? [y/N]${NC} ")" ans
+if [[ "$ans" =~ ^[yY]$ ]]; then
+    pyenv exec python -m pip install poetry
+    pyenv rehash
+    # or uncomment and use virtualenvironment way - up to you
+    pyenv exec poetry config virtualenvs.create false --local
+    echo "command to install dependencies: pyenv exec poetry install --no-root"
+else
+  echo -e "${GREEN}Skipping installing poetry.${NC}"
+fi
+
+read -p "$(echo -e "${YELLOW}Install uv? [y/N]${NC} ")" ans
+if [[ "$ans" =~ ^[yY]$ ]]; then
+    pyenv exec python -m pip install uv
+    pyenv rehash
+    echo "command to install dependencies: pyenv exec uv sync"
+else
+  echo -e "${GREEN}Skipping installing uv.${NC}"
+fi
