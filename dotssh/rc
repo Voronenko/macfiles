@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ -S "$HOME/.gnupg/S.gpg-agent" ]; then
+    gpgconf --kill gpg-agent 2>/dev/null
+    rm -f "$HOME/.gnupg/S.gpg-agent"
+fi

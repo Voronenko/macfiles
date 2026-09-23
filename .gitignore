@@ -142,3 +142,4 @@ bin/testssl/
 bin/kustomize
 bin/BrowserStackLocal
 bin/bs
+.DS_Store

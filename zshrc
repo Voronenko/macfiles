@@ -489,18 +489,25 @@ function start_agent {
 
 # Source SSH settings, if applicable
 
-if [ -f "${SSH_ENV}" ]; then
-    . "${SSH_ENV}" > /dev/null
-    #ps ${SSH_AGENT_PID} doesn't work under cywgin
-    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-        start_agent;
-    }
-else
-    start_agent;
+# Source local SSH agent settings only for local sessions.
+# When connected via SSH, preserve the forwarded SSH_AUTH_SOCK.
+if [[ -z "$SSH_CONNECTION" ]]; then
+    if [ -f "${SSH_ENV}" ]; then
+        . "${SSH_ENV}" > /dev/null
+        ps -ef | grep "${SSH_AGENT_PID}" | grep 'ssh-agent$' > /dev/null || {
+            start_agent
+        }
+    else
+        start_agent
+    fi
 fi
 
 if [[ -n $SSH_CONNECTION ]]; then
-echo " .... remote session `echo $USER`@`hostname` .... "
+    echo " .... remote session `echo $USER`@`hostname` .... "
+    export GIT_SSH_COMMAND="ssh -o IdentityAgent=$SSH_AUTH_SOCK"
+else
+    unset GIT_SSH_COMMAND
+
 fi
 
 source ${HOME}/dotfiles/helpers/dotfiles_prompt.zsh
