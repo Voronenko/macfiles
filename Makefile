@@ -10,7 +10,7 @@ swiss-docker: install-docker-dry install-docker-machine
 swiss-console: install-console-bat install-console-prettytyping install-console-diffsofancy install-console-fd install-console-ripgrep install-console-ncdu install-console-yq install-ngrok install-direnv
 	@echo console ok
 
-swiss-console-python: install-console-glances
+swiss-console-python: install-console-glances install-console-pipx install-console-osc
 	@echo python based console tools ok
 
 swiss-ops: install-hashicorp-terraform install-terraform-docs install-hashicorp-vault install-hashicorp-packer
@@ -108,6 +108,16 @@ install-console-ripgrep:
 # to present a large amount of monitoring information
 install-console-glances:
 	sudo pip install -U glances
+
+install-console-pipx:
+	brew install pipx
+
+install-console-osc:
+	curl -sLo /tmp/osc.tar.gz https://github.com/theimpostor/osc/releases/latest/download/osc_Darwin_arm64.tar.gz
+	tar -xzf /tmp/osc.tar.gz -C /tmp
+	mv /tmp/osc $(HOME)/dotfiles/bin/osc
+	chmod +x $(HOME)/dotfiles/bin/osc
+	rm -f /tmp/osc.tar.gz
 
 # https://tldr.sh/
 install-console-tldr:
@@ -697,3 +707,10 @@ install-pyenv:
 	echo "Installing virtualenv plugin"
 	brew install pyenv-virtualenv
 	echo "Usage: pyenv virtualenv 3.9.15 name-of-virtual-env"
+
+
+# AI stuff
+
+install-vllm-metal:
+	brew tap vllm-project/vllm-metal https://github.com/vllm-project/vllm-metal
+	brew install vllm-project/vllm-metal/vllm-metal
